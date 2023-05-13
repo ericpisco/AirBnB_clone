@@ -14,7 +14,9 @@ from models.place import Place
 from models.review import Review
 
 class HBNBCommand(cmd.Cmd):
-    """ Holberton command prompt to access models data """
+
+    #cmd for accessing model dat
+
     prompt = '(hbnb) '
     my_dict = {
         "BaseModel": BaseModel,
@@ -27,28 +29,30 @@ class HBNBCommand(cmd.Cmd):
             }
 
     def do_nothing(self, arg):
-        """ Does nothing """
+        
         pass
 
     def do_quit(self, arg):
-        """ Close program and saves safely data """
+        
         return True
 
     def do_EOF(self, arg):
-        """ Close program and saves safely data, when
-        user input is CTRL + D
-        """
+        
+        #Create new instances
+
         print("")
         return True
 
     def emptyline(self):
-        """ Overrides the empty line method """
+        
+        #override new lines
+
         pass
 
     def do_create(self, arg):
-        """ Creates a new instance of the basemodel class
-        Structure: create [class name]
-        """
+        
+        #prints strings
+
         if not arg:
             print("** class name missing **")
             return
@@ -61,11 +65,9 @@ class HBNBCommand(cmd.Cmd):
         print(new_instance.id)
 
     def do_show(self, arg):
-        """
-        Prints the string representation of an instance
-        based on the class name and id
-        Structure: show [class name] [id]
-        """
+        
+        #this deletes instances
+
         tokens = shlex.split(arg)
         if len(tokens) == 0:
             print("** class name missing **")
@@ -86,11 +88,10 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_destroy(self, arg):
-        """
-        Deletes an instance based on the class name and id
-        (saves the changes into the JSON file)
-        Structure: destroy [class name] [id]
-        """
+        
+
+        #save file
+
         tokens = shlex.split(arg)
         if len(tokens) == 0:
             print("** class name missing **")
@@ -111,12 +112,10 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
-        """
-        Prints all string representation of all instances
-        based or not on the class name
-        Structure: all [class name] or all
-        """
+        
+
         # prints the whole file
+
         storage.reload()
         my_json = []
         objects_dict = storage.all()
@@ -135,12 +134,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, arg):
-        """
-        Updates an instance based on the class name and
-        id by adding or updating attribute
-        (save the change into the JSON file).
-        Structure: update [class name] [id] [arg_name] [arg_value]
-        """
+        
+
+        #save changes
+
         if not arg:
             print("** class name missing **")
             return
@@ -174,12 +171,10 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_update2(self, arg):
-        """
-        Updates an instance based on the class name and
-        id by adding or updating attribute
-        (save the change into the JSON file).
-        Structure: update [class name] [id] [dictionary]
-        """
+        
+
+        #save changes in json file
+
         if not arg:
             print("** class name missing **")
             return
@@ -215,9 +210,9 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_count(self, arg):
-        """
-        Counts number of instances of a class
-        """
+        
+        #number of instances
+
         counter = 0
         objects_dict = storage.all()
         for key in objects_dict:
@@ -226,7 +221,9 @@ class HBNBCommand(cmd.Cmd):
         print(counter)
 
     def default(self, arg):
-        """ handle new ways of inputing data """
+        
+        #Imputing data in a different way
+
         val_dict = {
             "all": self.do_all,
             "count": self.do_count,
