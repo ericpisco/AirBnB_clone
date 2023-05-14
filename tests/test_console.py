@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 """Unit test for the file storage class
 """
 import unittest
@@ -13,7 +12,6 @@ import os
 
 
 class TestConsoleClass(unittest.TestCase):
-
     """TestConsoleClass resume
     Args:
         unittest (): Propertys for unit testing
@@ -28,7 +26,6 @@ class TestConsoleClass(unittest.TestCase):
             FileStorage._FileStorage__objects = {}
 
     def tearDown(self):
-
         """ destroys created file """
         FileStorage._FileStorage__file_path = "file.json"
         try:
@@ -37,7 +34,6 @@ class TestConsoleClass(unittest.TestCase):
             pass
 
     def test_module_doc(self):
-
         """ check for module documentation """
         self.assertTrue(len(HBNBCommand.__doc__) > 0)
 
@@ -51,7 +47,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue(len(func.__doc__) > 0)
 
     def test_pep8(self):
-
         """ test base and test_base for pep8 conformance """
         style = pep8.StyleGuide(quiet=True)
         file1 = 'console.py'
@@ -91,7 +86,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue(len(help_val.getvalue()) > 0)
 
     def test_create_good(self):
-
         """ Test the create function """
         with patch('sys.stdout', new=StringIO()) as help_val:
             HBNBCommand().onecmd("create BaseModel")
@@ -198,7 +192,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue(len(val.getvalue()) > 0)
 
     def test_update_missingclass(self):
-
         """ Checks if the class is missing """
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd('update')
@@ -213,7 +206,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue(val.getvalue() == "** class doesn't exist **\n")
 
     def test_update_noinstance(self):
-
         """ Checks is the instance id is missing """
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd('create BaseModel')
@@ -250,7 +242,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue(val.getvalue() == "** value missing **\n")
 
     def test_update_ok(self):
-
         """ update test working """
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("create BaseModel")
@@ -261,7 +252,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue("betty" in val.getvalue())
 
     def test_update_okextra(self):
-
         """ update test working """
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("create BaseModel")
@@ -272,7 +262,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue("betty" in val.getvalue())
 
     def test_user_console(self):
-
         """ Test the class user with console """
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("create User")
@@ -316,7 +305,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertEqual(val.getvalue(), "** no instance found **\n")
 
     def test_state_console(self):
-
         """ Test the class user with console """
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("create State")
@@ -338,7 +326,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertEqual(val.getvalue(), "** no instance found **\n")
 
     def test_city_console(self):
-
         """ Test the class user with console """
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("create City")
@@ -382,6 +369,7 @@ class TestConsoleClass(unittest.TestCase):
             self.assertEqual(val.getvalue(), "** no instance found **\n")
 
     def test_review_console(self):
+
         """ Test the class user with console """
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("create Review")
@@ -412,7 +400,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue(len(val.getvalue()) > 0)
 
     def test_alternative_show(self):
-
         """test alternative show with [class].show"""
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("create User")
@@ -422,7 +409,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue(len(val.getvalue()) > 0)
 
     def test_count(self):
-
         """test alternative show with [class].show"""
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("User.count()")
@@ -446,7 +432,6 @@ class TestConsoleClass(unittest.TestCase):
             self.assertTrue(int(val.getvalue()) == 0)
 
     def test_alternative_update1(self):
-
         """test alternative update with [class].show"""
         with patch('sys.stdout', new=StringIO()) as val:
             HBNBCommand().onecmd("create User")
