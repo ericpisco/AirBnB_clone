@@ -1,6 +1,7 @@
-!/usr/bin/python3
-#The base console
-
+#!/usr/bin/python3
+"""
+This is the console base for the unit
+"""
 import cmd
 from models.base_model import BaseModel
 from models import storage
@@ -13,10 +14,9 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
-
-    #cmd for accessing model dat
-
+    """ Holberton command prompt to access models data """
     prompt = '(hbnb) '
     my_dict = {
         "BaseModel": BaseModel,
@@ -29,30 +29,28 @@ class HBNBCommand(cmd.Cmd):
             }
 
     def do_nothing(self, arg):
-        
+        """ Does nothing """
         pass
 
     def do_quit(self, arg):
-        
+        """ Close program and saves safely data """
         return True
 
     def do_EOF(self, arg):
-        
-        #Create new instances
-
+        """ Close program and saves safely data, when
+        user input is CTRL + D
+        """
         print("")
         return True
 
     def emptyline(self):
-        
-        #override new lines
-
+        """ Overrides the empty line method """
         pass
 
     def do_create(self, arg):
-        
-        #prints strings
-
+        """ Creates a new instance of the basemodel class
+        Structure: create [class name]
+        """
         if not arg:
             print("** class name missing **")
             return
@@ -65,9 +63,11 @@ class HBNBCommand(cmd.Cmd):
         print(new_instance.id)
 
     def do_show(self, arg):
-        
-        #this deletes instances
-
+        """
+        Prints the string representation of an instance
+        based on the class name and id
+        Structure: show [class name] [id]
+        """
         tokens = shlex.split(arg)
         if len(tokens) == 0:
             print("** class name missing **")
@@ -88,10 +88,11 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_destroy(self, arg):
-        
-
-        #save file
-
+        """
+        Deletes an instance based on the class name and id
+        (saves the changes into the JSON file)
+        Structure: destroy [class name] [id]
+        """
         tokens = shlex.split(arg)
         if len(tokens) == 0:
             print("** class name missing **")
@@ -112,10 +113,12 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
 
     def do_all(self, arg):
-        
-
+        """
+        Prints all string representation of all instances
+        based or not on the class name
+        Structure: all [class name] or all
+        """
         # prints the whole file
-
         storage.reload()
         my_json = []
         objects_dict = storage.all()
@@ -134,10 +137,12 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, arg):
-        
-
-        #save changes
-
+        """
+        Updates an instance based on the class name and
+        id by adding or updating attribute
+        (save the change into the JSON file).
+        Structure: update [class name] [id] [arg_name] [arg_value]
+        """
         if not arg:
             print("** class name missing **")
             return
@@ -171,10 +176,12 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_update2(self, arg):
-        
-
-        #save changes in json file
-
+        """
+        Updates an instance based on the class name and
+        id by adding or updating attribute
+        (save the change into the JSON file).
+        Structure: update [class name] [id] [dictionary]
+        """
         if not arg:
             print("** class name missing **")
             return
@@ -210,9 +217,9 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_count(self, arg):
-        
-        #number of instances
-
+        """
+        Counts number of instances of a class
+        """
         counter = 0
         objects_dict = storage.all()
         for key in objects_dict:
@@ -221,9 +228,7 @@ class HBNBCommand(cmd.Cmd):
         print(counter)
 
     def default(self, arg):
-        
-        #Imputing data in a different way
-
+        """ handle new ways of inputing data """
         val_dict = {
             "all": self.do_all,
             "count": self.do_count,
