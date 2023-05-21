@@ -1,1 +1,1 @@
-This directory contains all images for the static web
+This directory contains images to be used in this project
